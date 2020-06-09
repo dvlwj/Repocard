@@ -7,6 +7,7 @@
             <v-toolbar color="primary" dark flat>
               <v-toolbar-title>Selamat Datang !</v-toolbar-title>
               <v-spacer></v-spacer>
+              <v-icon>mdi-login</v-icon>
             </v-toolbar>
             <v-card-text>
               <v-form>
@@ -14,6 +15,7 @@
                   label="Nama Akun"
                   name="login"
                   prepend-icon="mdi-account"
+                  v-model="loginUsername"
                   type="text"
                 ></v-text-field>
 
@@ -22,13 +24,14 @@
                   label="Kata Sandi"
                   name="password"
                   prepend-icon="mdi-lock"
+                  v-model="loginPassword"
                   type="password"
                 ></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary">Masuk</v-btn>
+              <v-btn color="primary" @click="login">Masuk</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -38,11 +41,39 @@
 </template>
 
 <script>
-// @ is an alias to /src
+import axios from 'axios';
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
+  },
+  data: () => ({
+    loginUsername: '',
+    loginPassword: '',
+  }),
+  watch: {},
+  methods: {
+    login() {
+      console.log('start login');
+      const dataToSend = {
+        username: this.loginUsername,
+        password: this.loginPassword,
+      };
+      axios({
+        method: 'post',
+        url: 'http://localhost:8081/login',
+        data: dataToSend,
+        timeout: 10000,
+      }).then((res) => {
+        if (res.status === 200) {
+          this.$router.push({ name: 'Dashboard' });
+        } else {
+          alert('Login gagagal');
+        }
+      }).catch((error) => {
+        alert(error);
+      });
+    },
   },
 };
 </script>
