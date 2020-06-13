@@ -30,6 +30,7 @@ create table data_student
 	id int auto_increment,
 	nama varchar(255) not null,
 	kelas varchar(50) not null,
+	active tinyint not null,
 	constraint data_student_pk
 		primary key (id)
 );
