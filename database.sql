@@ -24,3 +24,13 @@ create unique index data_user_username_uindex
 	on data_user (username);
 
 INSERT INTO `data_user` (`username`, `password`, `level` ,`active`) VALUES ('admin', md5('admin'), '1', '1');
+
+create table data_student
+(
+	id int auto_increment,
+	nama varchar(255) not null,
+	kelas varchar(50) not null,
+	constraint data_student_pk
+		primary key (id)
+);
+
