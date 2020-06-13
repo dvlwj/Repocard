@@ -35,3 +35,13 @@ create table data_student
 		primary key (id)
 );
 
+create table data_nilai
+(
+	id int auto_increment,
+	id_siswa int not null,
+	nama_mata_pelajaran varchar(255) not null,
+	nilai int not null,
+	constraint data_nilai_pk
+		primary key (id)
+);
+
