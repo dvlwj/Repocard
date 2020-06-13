@@ -4,13 +4,13 @@ const connection = require('../../shared/databases/connection');
 exports.deleteController = function deleteController(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Delete Student Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
-  const { nama } = requestPayloadBody;
+  const { nama, id } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_student (nama, active) VALUES (?, 2)',
+      sql: 'Update data_student set name = ? , active = 2 where id = ?',
       timeout: 30000,
     },
-    [nama],
+    [nama, id],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal menghapus data siswa';

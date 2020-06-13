@@ -7,7 +7,7 @@ exports.deleteController = function deleteController(req, res) {
   const { username } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_user (username, active) VALUES (?, 2)',
+      sql: 'Update data_user set username = ? , active = 2',
       timeout: 30000,
     },
     [username],

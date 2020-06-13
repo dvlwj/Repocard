@@ -4,13 +4,13 @@ const connection = require('../../shared/databases/connection');
 exports.update = function update(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Update Guru Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
-  const { username, password } = requestPayloadBody;
+  const { username, password, userID } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_user (username, password) VALUES (?, md5(?))',
+      sql: 'Update data_user set username = ? , password = md5(?) where id = ?',
       timeout: 30000,
     },
-    [username, password],
+    [username, password, userID],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal mengubah data guru';

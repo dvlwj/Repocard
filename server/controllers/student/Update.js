@@ -4,13 +4,13 @@ const connection = require('../../shared/databases/connection');
 exports.update = function update(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Update siswa Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
-  const { nama, kelas } = requestPayloadBody;
+  const { id, nama, kelas } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_student (nama, kelas) VALUES (?, ?)',
+      sql: 'Update data_student set nama = ?, kelas = ? where id = ?',
       timeout: 30000,
     },
-    [nama, kelas],
+    [nama, kelas, id],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal mengubah data siswa';

@@ -4,13 +4,13 @@ const connection = require('../../shared/databases/connection');
 exports.update = function update(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Update subject Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
-  const { studentID, subjectName, value } = requestPayloadBody;
+  const { id, subjectName, value } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_nilai (id_siswa, nama_mata_pelajaran, nilai) VALUES (?, ?, ?)',
+      sql: 'update data_nilai set nama_mata_pelajara = ?, nilai = ?  where id  = ?',
       timeout: 30000,
     },
-    [studentID, subjectName, value],
+    [subjectName, value, id],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal mengubah data subject';
