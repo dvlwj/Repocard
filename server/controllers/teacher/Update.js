@@ -1,7 +1,7 @@
 const response = require('../../shared/utils/response');
 const connection = require('../../shared/databases/connection');
 
-exports.create = function create(req, res) {
+exports.update = function update(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Update Guru Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
   const { username, password } = requestPayloadBody;
