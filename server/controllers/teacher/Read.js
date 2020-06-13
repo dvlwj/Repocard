@@ -1,28 +1,28 @@
 const response = require('../../shared/utils/response');
 const connection = require('../../shared/databases/connection');
 
-exports.create = function create(req, res) {
+exports.read = function read(req, res) {
   const requestPayloadBody = req.body;
-  console.log(`Mulai Create Guru Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
+  console.log(`Mulai Read Guru Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
   const { username, password } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_user (username, password, level, active) VALUES (?, md5(?), 2, 1)',
+      sql: 'SELECT * FROM data_user where username = ? and level = 2 and active = 1',
       timeout: 30000,
     },
     [username, password, ],
     (error, rows) => {
       if (error || rows.length === 0) {
-        const message = 'Gagal Menambah Guru Baru';
+        const message = 'Gagal mendapatkan daftar guru';
         response.error(message, res);
       } else {
-        console.log('Sukses menambah guru baru');
+        console.log('Sukses mendapatkan daftar guru');
         const dataToReturn = {
-          message: 'Sukses menambah guru',
+          message: 'Sukses mendapatkan daftar guru',
         };
         response.ok(dataToReturn, res);
       }
-      console.log('Selesai Create Guru Controller');
+      console.log('Selesai Read Guru Controller');
     },
   );
 };

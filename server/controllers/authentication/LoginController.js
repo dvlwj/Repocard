@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const response = require('../../shared/utils/response');
 const connection = require('../../shared/databases/connection');
 
