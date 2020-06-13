@@ -4,13 +4,11 @@ const connection = require('../../shared/databases/connection');
 exports.read = function read(req, res) {
   const requestPayloadBody = req.body;
   console.log(`Mulai Read Guru Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
-  const { username, password } = requestPayloadBody;
   connection.query(
     {
-      sql: 'SELECT * FROM data_user where username = ? and level = 2 and active = 1',
+      sql: 'SELECT * FROM data_user where level = 2 and active = 1',
       timeout: 30000,
     },
-    [username, password, ],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal mendapatkan daftar guru';
