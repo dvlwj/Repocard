@@ -16,7 +16,7 @@ module.exports = function route(app) {
   app.route('/guru/delete')
     .post(deleteTeacher.deleteController);
   app.route('/guru/read')
-    .post(readTeacher.read);
+    .get(readTeacher.read);
   app.route('/guru/update')
     .post(updateTeacher.update);
   app.route('/admin/create')

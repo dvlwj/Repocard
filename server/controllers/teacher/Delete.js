@@ -7,7 +7,7 @@ exports.deleteController = function deleteController(req, res) {
   const { username } = requestPayloadBody;
   connection.query(
     {
-      sql: 'Update data_user set username = ? , active = 2',
+      sql: 'Update data_user set active = 2 where username = ?',
       timeout: 30000,
     },
     [username],

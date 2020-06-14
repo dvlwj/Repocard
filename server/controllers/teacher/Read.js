@@ -10,9 +10,15 @@ exports.read = function read(req, res) {
       timeout: 30000,
     },
     (error, rows) => {
-      if (error || rows.length === 0) {
+      if (error) {
         const message = 'Gagal mendapatkan daftar guru';
         response.error(message, res);
+      } else if(rows.length === 0) {
+        const dataToreturn = {
+          message: 'Sukses mendapatkan daftar guru',
+          data: {},
+        };
+        response.ok(dataToreturn, res);
       } else {
         console.log('Sukses mendapatkan daftar guru');
         const dataToReturn = {

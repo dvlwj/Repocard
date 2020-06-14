@@ -52,7 +52,7 @@
 import axios from 'axios';
 
 export default {
-  name: 'UpdateAdminModal',
+  name: 'UpdateTeacherModal',
   components: {
   },
   data: () => ({
@@ -63,7 +63,7 @@ export default {
     password: null,
     rulesPassword: [
       (v) => v.length > 5 || 'Password terlalu pendek',
-      (v) => !!v || 'Password admin wajib diisi',
+      (v) => !!v || 'Password guru wajib diisi',
       (v) => (v || '').indexOf(' ') < 0 || 'Tidak boleh pakai spasi',
     ],
   }),
@@ -84,13 +84,13 @@ export default {
       };
       await axios({
         method: 'post',
-        url: 'http://localhost:8081/admin/update',
+        url: 'http://localhost:8081/guru/update',
         data: dataToSend,
         timeout: 10000,
       })
         .then((res) => {
           if (res.status !== 200) {
-            const message = 'Gagal mengubdah data admin. Silahkan coba lagi';
+            const message = 'Gagal mengubdah data guru. Silahkan coba lagi';
             alert(message);
             return;
           }
