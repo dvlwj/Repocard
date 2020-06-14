@@ -18,7 +18,7 @@
                     <v-icon>mdi-plus</v-icon>
                     Tambah
                   </v-btn>
-                  <v-btn text>
+                  <v-btn text @click="showModalAdminList">
                     <v-icon>mdi-clipboard-list</v-icon>
                     Lihat Daftar
                   </v-btn>
@@ -89,12 +89,14 @@
       </v-row>
     </v-container>
     <CreateAdminModal ref="CreateAdminModal"></CreateAdminModal>
+    <ListAdminModal ref="ListAdminModal"></ListAdminModal>
     <CreateTeacherModal ref="CreateTeacherModal"></CreateTeacherModal>
   </v-container>
 </template>
 
 <script>
 import CreateAdminModal from '@/components/CreateAdminModal.vue';
+import ListAdminModal from '@/components/ListAdminModal.vue';
 import CreateTeacherModal from '@/components/CreateTeacherModal.vue';
 
 export default {
@@ -102,6 +104,7 @@ export default {
   components: {
     CreateAdminModal,
     CreateTeacherModal,
+    ListAdminModal,
   },
   data: () => ({
     username: null,
@@ -122,6 +125,9 @@ export default {
     },
     showModalAdminCreate() {
       this.$refs.CreateAdminModal.showModalFunction();
+    },
+    showModalAdminList() {
+      this.$refs.ListAdminModal.showModalFunction();
     },
     showModalTeacherCreate() {
       this.$refs.CreateTeacherModal.showModalFunction();

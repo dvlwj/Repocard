@@ -24,7 +24,7 @@ module.exports = function route(app) {
   app.route('/admin/delete')
     .post(deleteAdmin.deleteController);
   app.route('/admin/read')
-    .post(readAdmin.read);
+    .get(readAdmin.read);
   app.route('/admin/update')
     .post(updateAdmin.update);
   // app.route('/users').get(todoList.users);
