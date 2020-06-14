@@ -4,7 +4,7 @@
       <v-row align="center" justify="center">
         <v-col cols="12" sm="8" md="4">
           <v-card class="elevation-12">
-            <v-toolbar color="primary" dark flat>
+            <v-toolbar color="red lighten-1" dark flat>
               <v-toolbar-title>Selamat Datang !</v-toolbar-title>
               <v-spacer></v-spacer>
               <v-icon>mdi-login</v-icon>
@@ -14,6 +14,7 @@
                 <v-text-field
                   label="Nama Akun"
                   name="login"
+                  color="red lighten-1"
                   prepend-icon="mdi-account"
                   v-model="loginUsername"
                   type="text"
@@ -23,6 +24,7 @@
                   id="password"
                   label="Kata Sandi"
                   name="password"
+                  color="red lighten-1"
                   prepend-icon="mdi-lock"
                   v-model="loginPassword"
                   type="password"
@@ -31,7 +33,7 @@
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="primary" @click="login">Masuk</v-btn>
+              <v-btn color="red lighten-1" dark @click="login">Masuk</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -54,7 +56,6 @@ export default {
   watch: {},
   methods: {
     login() {
-      console.log('start login');
       const dataToSend = {
         username: this.loginUsername,
         password: this.loginPassword,
@@ -66,9 +67,13 @@ export default {
         timeout: 10000,
       }).then((res) => {
         if (res.status === 200) {
+          const resToSave = res.data.data;
+          this.$store.dispatch('setUsername', resToSave.username);
+          this.$store.dispatch('setPassword', resToSave.password);
+          this.$store.dispatch('setLevel', resToSave.level);
           this.$router.push({ name: 'Dashboard' });
         } else {
-          alert('Login gagagal');
+          alert('Login gagal');
         }
       }).catch((error) => {
         alert(error);

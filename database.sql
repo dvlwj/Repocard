@@ -16,12 +16,13 @@ create table data_user
 	password varchar(255) not null,
 	level tinyint not null,
 	active tinyint not null,
+	UNIQUE (username),
 	constraint data_user_pk
 		primary key (id)
 );
 
-create unique index data_user_username_uindex
-	on data_user (username);
+-- create unique index data_user_username_uindex
+-- 	on data_user (username);
 
 INSERT INTO `data_user` (`username`, `password`, `level` ,`active`) VALUES ('admin', md5('admin'), '1', '1');
 

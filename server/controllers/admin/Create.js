@@ -1,30 +1,28 @@
 const response = require('../../shared/utils/response');
 const connection = require('../../shared/databases/connection');
 
-exports.login = function login(req, res) {
+exports.create = function create(req, res) {
   const requestPayloadBody = req.body;
-  console.log(`Mulai Login Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
+  console.log(`Mulai Create admin Controller, payload : ${JSON.stringify(requestPayloadBody)}`);
   const { username, password } = requestPayloadBody;
   connection.query(
     {
-      sql: 'SELECT * FROM data_user where username = ? and password = md5(?) and active = 1',
+      sql: 'INSERT INTO data_user (username, password, level, active) VALUES (?, md5(?), 1, 1)',
       timeout: 30000,
     },
     [username, password],
     (error, rows) => {
       if (error || rows.length === 0) {
-        const message = 'Failed to process login request';
+        const message = 'Gagal Menambah admin Baru';
         response.error(message, res);
       } else {
-        console.log('Login sukses');
+        console.log('Sukses menambah admin baru');
         const dataToReturn = {
-          username: requestPayloadBody.username,
-          password: requestPayloadBody.password,
-          level: rows[0].level,
+          message: 'Sukses menambah admin',
         };
         response.ok(dataToReturn, res);
       }
-      console.log('Selesai Login Controller');
+      console.log('Selesai Create admin Controller');
     },
   );
 };
