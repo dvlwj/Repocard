@@ -22,6 +22,16 @@
               v-model="password"
               type="password"
             ></v-text-field>
+            <v-select
+              :items="subjects"
+              v-model="subject"
+              label="Mata Pelajaran*"
+              single-line
+              item-text="name"
+              item-value="id"
+              prepend-icon="mdi-teach"
+            >
+            </v-select>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -55,6 +65,8 @@ export default {
   name: 'UpdateTeacherModal',
   components: {
   },
+  mounted() {
+  },
   data: () => ({
     showModal: false,
     isUpdateButtonDisable: true,
@@ -65,6 +77,20 @@ export default {
       (v) => v.length > 5 || 'Password terlalu pendek',
       (v) => !!v || 'Password guru wajib diisi',
       (v) => (v || '').indexOf(' ') < 0 || 'Tidak boleh pakai spasi',
+    ],
+    subject: null,
+    subjects: [
+      { id: 1, name: 'Agama' },
+      { id: 2, name: 'Bahasa Indonesia' },
+      { id: 3, name: 'Pkn' },
+      { id: 4, name: 'Bahasa Inggris' },
+      { id: 5, name: 'IPA' },
+      { id: 6, name: 'IPS' },
+      { id: 7, name: 'Matematika' },
+      { id: 8, name: 'TIK' },
+      { id: 9, name: 'Penjaskes' },
+      { id: 10, name: 'Seni Budaya' },
+      { id: 11, name: 'Bahasa Mandarin' },
     ],
   }),
   watch: {
@@ -81,6 +107,7 @@ export default {
         userID: this.id,
         username: this.username,
         password: this.password,
+        idMatpel: this.subject,
       };
       await axios({
         method: 'post',
@@ -104,9 +131,20 @@ export default {
         });
       // this.$emit('resyncParent');
     },
-    showModalFunction(id, username) {
+    returnSubjectName(id) {
+      const subject = this.subjects.findIndex((o) => o.id === id);
+      // const subjectInObject = JSON.parse(subject);
+      // const subjectIndex = this.subjects.indexOf(subject);
+      // return this.subject[subject].name;
+      // subject = subject === -1 ? 0 : subject+1;
+      this.subject = subject + 1;
+      // this.subject = this.subjects[subject].name;
+    },
+    showModalFunction(id, username, password, subject) {
       this.id = id;
       this.username = username;
+      this.subject = subject;
+      this.returnSubjectName(subject);
       this.password = '';
       this.showModal = true;
     },

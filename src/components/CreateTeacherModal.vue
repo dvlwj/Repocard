@@ -49,6 +49,17 @@
             >
             </v-text-field>
           </v-col>
+          <v-col cols="12" sm="12" md="12">
+            <v-select
+              :items="subjects"
+              v-model="subject"
+              label="Mata Pelajaran*"
+              single-line
+              item-text="name"
+              item-value="id"
+            >
+            </v-select>
+          </v-col>
         </v-row>
       </v-container>
       </v-card>
@@ -67,6 +78,20 @@ export default {
     showModal: false,
     username: null,
     password: null,
+    subject: null,
+    subjects: [
+      { id: 1, name: 'Agama' },
+      { id: 2, name: 'Bahasa Indonesia' },
+      { id: 3, name: 'Pkn' },
+      { id: 4, name: 'Bahasa Inggris' },
+      { id: 5, name: 'IPA' },
+      { id: 6, name: 'IPS' },
+      { id: 7, name: 'Matematika' },
+      { id: 8, name: 'TIK' },
+      { id: 9, name: 'Penjaskes' },
+      { id: 10, name: 'Seni Budaya' },
+      { id: 11, name: 'Bahasa Mandarin' },
+    ],
     rulesUsername: [
       (v) => !!v || 'Username guru wajib diisi',
       (v) => (v || '').indexOf(' ') < 0 || 'Tidak boleh pakai spasi',
@@ -79,15 +104,30 @@ export default {
   }),
   watch: {
     username() {
-      const isDisabled = (this.username.length > 0)
-        ? this.isSaveButtonDisable = false
-        : this.isSaveButtonDisable = true;
+      let isDisabled = this.username && this.username.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.password && this.password.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.subject && this.subject > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
       this.isSaveButtonDisable = isDisabled;
     },
     password() {
-      const isDisabled = (this.password.length > 0)
-        ? this.isSaveButtonDisable = false
-        : this.isSaveButtonDisable = true;
+      let isDisabled = this.username && this.username.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.password && this.password.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.subject && this.subject > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      this.isSaveButtonDisable = isDisabled;
+    },
+    subject() {
+      let isDisabled = this.username && this.username.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.password && this.password.length > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
+      isDisabled = this.subject && this.subject > 0
+        ? this.isSaveButtonDisable = false : this.isSaveButtonDisable = true;
       this.isSaveButtonDisable = isDisabled;
     },
   },
@@ -96,6 +136,7 @@ export default {
       const dataToSend = {
         username: this.username,
         password: this.password,
+        idMatpel: this.subject,
       };
       await axios({
         method: 'post',

@@ -38,9 +38,14 @@
                 mdi-school
               </v-icon>
             </v-col>
-            <v-col :cols="6" class="align-self-center">
+            <v-col :cols="4" class="align-self-center">
               <p class="align-self-center">
                 {{person.username}}
+              </p>
+            </v-col>
+            <v-col :cols="2" class="align-self-center">
+              <p class="align-self-center text-center">
+                {{returnSubjectName(person.mat_pel)}}
               </p>
             </v-col>
             <v-col :cols="2" class="align-self-center">
@@ -49,7 +54,9 @@
                 sm="2"
                 class="ma-2 align-self-center"
                 color="success"
-                @click="showUpdateDataModal(person.id, person.username, person.password)"
+                @click="
+                  showUpdateDataModal(person.id, person.username, person.password, person.mat_pel)
+                "
               >
                 Detil
                 <v-icon right>mdi-account-details</v-icon>
@@ -97,6 +104,20 @@ export default {
     subGroup: false,
     nav: false,
     rounded: false,
+    subjects: [
+      { id: 0, name: '-' },
+      { id: 1, name: 'Agama' },
+      { id: 2, name: 'Bahasa Indonesia' },
+      { id: 3, name: 'Pkn' },
+      { id: 4, name: 'Bahasa Inggris' },
+      { id: 5, name: 'IPA' },
+      { id: 6, name: 'IPS' },
+      { id: 7, name: 'Matematika' },
+      { id: 8, name: 'TIK' },
+      { id: 9, name: 'Penjaskes' },
+      { id: 10, name: 'Seni Budaya' },
+      { id: 11, name: 'Bahasa Mandarin' },
+    ],
   }),
   mounted() {
     this.getList();
@@ -124,8 +145,8 @@ export default {
           alert(error);
         });
     },
-    async showUpdateDataModal(id, username, password) {
-      this.$refs.UpdateTeacherModal.showModalFunction(id, username, password);
+    async showUpdateDataModal(id, username, password, subject) {
+      this.$refs.UpdateTeacherModal.showModalFunction(id, username, password, subject);
     },
     async deleteData(usernameData) {
       const dataToSend = {
@@ -160,6 +181,14 @@ export default {
     },
     async resyncParent() {
       await this.getList();
+    },
+    returnSubjectName(id) {
+      let subject = this.subjects.findIndex((o) => o.id === id);
+      // const subjectInObject = JSON.parse(subject);
+      // const subjectIndex = this.subjects.indexOf(subject);
+      // return this.subject[subject].name;
+      subject = subject === -1 ? 0 : subject;
+      return this.subjects[subject].name;
     },
   },
 };
