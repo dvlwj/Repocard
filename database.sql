@@ -1,13 +1,5 @@
 CREATE DATABASE `repocard` COLLATE 'utf8_general_ci';
 USE repocard;
--- CREATE TABLE `data_user` (
---   `id` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
---   `username` varchar(50) NOT NULL UNIQUE,
---   `password` varchar(255) NOT NULL,
---   `level` tinyint NOT NULL,
---   `active` tinyint NOT NULL
--- ) ENGINE='InnoDB' COLLATE 'utf8_general_ci';
--- INSERT INTO `data_user` (`username`, `password`, `level` ,`active`) VALUES ('admin', md5('admin'), '1', '1');
 
 create table data_user
 (
@@ -16,13 +8,11 @@ create table data_user
 	password varchar(255) not null,
 	level tinyint not null,
 	active tinyint not null,
+	mat_pel tinyint null,
 	UNIQUE (username),
 	constraint data_user_pk
 		primary key (id)
 );
-
--- create unique index data_user_username_uindex
--- 	on data_user (username);
 
 INSERT INTO `data_user` (`username`, `password`, `level` ,`active`) VALUES ('admin', md5('admin'), '1', '1');
 
