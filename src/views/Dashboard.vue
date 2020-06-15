@@ -81,6 +81,31 @@
           </v-card>
         </v-col>
         <v-col cols="12">
+          <v-card color="#009688" dark tile>
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
+                <v-card-title class="headline">
+                  Nilai
+                </v-card-title>
+                <v-card-subtitle>Kelola Nilai Siswa disini</v-card-subtitle>
+                <v-card-actions>
+                  <v-btn text>
+                    <v-icon>mdi-plus</v-icon>
+                    Tambah
+                  </v-btn>
+                  <v-btn text>
+                    <v-icon>mdi-clipboard-list</v-icon>
+                    Lihat Daftar
+                  </v-btn>
+                </v-card-actions>
+              </div>
+              <v-icon class="ma-3" size="125" tile>
+                mdi-fountain-pen-tip
+              </v-icon>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col cols="12">
           <v-btn class="error" block dark x-large @click="logout()">
             <v-icon>mdi-logout-variant</v-icon>
             Keluar
