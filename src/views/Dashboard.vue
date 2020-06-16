@@ -64,11 +64,11 @@
                 </v-card-title>
                 <v-card-subtitle>Kelola Siswa disini</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn text>
+                  <v-btn text @click="showModalStudentCreate">
                     <v-icon>mdi-plus</v-icon>
                     Tambah
                   </v-btn>
-                  <v-btn text>
+                  <v-btn text @click="showModalStudentList">
                     <v-icon>mdi-clipboard-list</v-icon>
                     Lihat Daftar
                   </v-btn>
@@ -117,6 +117,8 @@
     <ListAdminModal ref="ListAdminModal"></ListAdminModal>
     <CreateTeacherModal ref="CreateTeacherModal"></CreateTeacherModal>
     <ListTeacherModal ref="ListTeacherModal"></ListTeacherModal>
+    <CreateStudentModal ref="CreateStudentModal"></CreateStudentModal>
+    <ListStudentModal ref="ListStudentModal"></ListStudentModal>
   </v-container>
 </template>
 
@@ -125,6 +127,8 @@ import CreateAdminModal from '@/components/CreateAdminModal.vue';
 import ListAdminModal from '@/components/ListAdminModal.vue';
 import CreateTeacherModal from '@/components/CreateTeacherModal.vue';
 import ListTeacherModal from '@/components/ListTeacherModal.vue';
+import CreateStudentModal from '@/components/CreateStudentModal.vue';
+import ListStudentModal from '@/components/ListStudentModal.vue';
 
 export default {
   name: 'Dashboard',
@@ -133,6 +137,8 @@ export default {
     CreateTeacherModal,
     ListAdminModal,
     ListTeacherModal,
+    CreateStudentModal,
+    ListStudentModal,
   },
   data: () => ({
     username: null,
@@ -162,6 +168,12 @@ export default {
     },
     showModalTeacherCreate() {
       this.$refs.CreateTeacherModal.showModalFunction();
+    },
+    showModalStudentCreate() {
+      this.$refs.CreateStudentModal.showModalFunction();
+    },
+    showModalStudentList() {
+      this.$refs.ListStudentModal.showModalFunction();
     },
     async resyncParent(modalName) {
       await this.getList();

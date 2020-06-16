@@ -20,6 +20,7 @@ create table data_student
 (
 	id int auto_increment,
 	nama varchar(255) not null,
+	password varchar(255) not null,
 	kelas varchar(50) not null,
 	active tinyint not null,
 	constraint data_student_pk
@@ -30,7 +31,8 @@ create table data_nilai
 (
 	id int auto_increment,
 	id_siswa int not null,
-	nama_mata_pelajaran varchar(255) not null,
+	id_mata_pelajaran int not null,
+	kategori int not null,
 	nilai int not null,
 	constraint data_nilai_pk
 		primary key (id)
