@@ -71,6 +71,7 @@ export default {
           this.$store.dispatch('setUsername', resToSave.username);
           this.$store.dispatch('setPassword', resToSave.password);
           this.$store.dispatch('setLevel', resToSave.level);
+          this.$store.dispatch('setMatpel', resToSave.matpel);
           this.$router.push({ name: 'Dashboard' });
         } else {
           alert('Login gagal');

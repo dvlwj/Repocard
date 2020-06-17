@@ -21,6 +21,7 @@ exports.login = function login(req, res) {
           username: requestPayloadBody.username,
           password: requestPayloadBody.password,
           level: rows[0].level,
+          matpel: rows[0].mat_pel,
         };
         response.ok(dataToReturn, res);
       }

@@ -11,6 +11,10 @@ const createStudent = require('./controllers/student/Create');
 const deleteStudent = require('./controllers/student/Delete');
 const readStudent = require('./controllers/student/Read');
 const updateStudent = require('./controllers/student/Update');
+const createScore = require('./controllers/score/Create');
+const deleteScore = require('./controllers/score/Delete');
+const readScore = require('./controllers/score/Read');
+const updateScore = require('./controllers/score/Update');
 
 module.exports = function route(app) {
   app.route('/login')
@@ -39,5 +43,13 @@ module.exports = function route(app) {
     .get(readStudent.read);
   app.route('/murid/update')
     .post(updateStudent.update);
+  app.route('/nilai/create')
+    .post(createScore.create);
+  app.route('/nilai/delete')
+    .post(deleteScore.deleteController);
+  app.route('/nilai/read')
+    .get(readScore.read);
+  app.route('/nilai/update')
+    .post(updateScore.update);
   // app.route('/users').get(todoList.users);
 };

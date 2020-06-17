@@ -32,8 +32,16 @@ create table data_nilai
 	id int auto_increment,
 	id_siswa int not null,
 	id_mata_pelajaran int not null,
-	kategori int not null,
-	nilai int not null,
+	nilai1 int not null,
+	nilai2 int not null,
+	nilai3 int not null,
+	nilai4 int not null,
+	nilai5 int not null,
+	nilai6 int not null,
+	nilai7 int not null,
+	nilai8 int not null,
+	nilai9 int not null,
+	nilai10 int not null,
 	constraint data_nilai_pk
 		primary key (id)
 );

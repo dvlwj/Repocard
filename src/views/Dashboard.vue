@@ -80,7 +80,7 @@
             </div>
           </v-card>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" v-if="level == 2">
           <v-card color="#009688" dark tile>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -89,7 +89,7 @@
                 </v-card-title>
                 <v-card-subtitle>Kelola Nilai Siswa disini</v-card-subtitle>
                 <v-card-actions>
-                  <v-btn text>
+                  <v-btn text @click="showModalScoreCreate()">
                     <v-icon>mdi-plus</v-icon>
                     Tambah
                   </v-btn>
@@ -119,6 +119,7 @@
     <ListTeacherModal ref="ListTeacherModal"></ListTeacherModal>
     <CreateStudentModal ref="CreateStudentModal"></CreateStudentModal>
     <ListStudentModal ref="ListStudentModal"></ListStudentModal>
+    <CreateScoreModal ref="CreateScoreModal"></CreateScoreModal>
   </v-container>
 </template>
 
@@ -129,6 +130,7 @@ import CreateTeacherModal from '@/components/CreateTeacherModal.vue';
 import ListTeacherModal from '@/components/ListTeacherModal.vue';
 import CreateStudentModal from '@/components/CreateStudentModal.vue';
 import ListStudentModal from '@/components/ListStudentModal.vue';
+import CreateScoreModal from '@/components/CreateScoreModal.vue';
 
 export default {
   name: 'Dashboard',
@@ -139,6 +141,7 @@ export default {
     ListTeacherModal,
     CreateStudentModal,
     ListStudentModal,
+    CreateScoreModal,
   },
   data: () => ({
     username: null,
@@ -174,6 +177,9 @@ export default {
     },
     showModalStudentList() {
       this.$refs.ListStudentModal.showModalFunction();
+    },
+    showModalScoreCreate() {
+      this.$refs.CreateScoreModal.showModalFunction();
     },
     async resyncParent(modalName) {
       await this.getList();
