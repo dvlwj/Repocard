@@ -152,7 +152,7 @@ export default {
       await axios({
         method: 'post',
         data: dataToSend,
-        url: 'http://localhost:8081/guru/delete',
+        url: 'http://localhost:8081/murid/delete',
         timeout: 10000,
       })
         .then((res) => {
