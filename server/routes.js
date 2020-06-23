@@ -15,10 +15,19 @@ const createScore = require('./controllers/score/Create');
 const deleteScore = require('./controllers/score/Delete');
 const readScore = require('./controllers/score/Read');
 const updateScore = require('./controllers/score/Update');
+const authenticationStudent = require('./controllers/authentication/LoginStudentController');
+const changePassword = require('./controllers/authentication/ChangePasswordController');
+const changePasswordStudent = require('./controllers/authentication/ChangePasswordStudentController');
 
 module.exports = function route(app) {
   app.route('/login')
     .post(authentication.login);
+  app.route('/login/siswa')
+    .post(authenticationStudent.login);
+  app.route('/changePassword')
+    .post(changePassword.login);
+  app.route('/changePassword/student')
+    .post(changePasswordStudent.login);
   app.route('/guru/create')
     .post(createTeacher.create);
   app.route('/guru/delete')

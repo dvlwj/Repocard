@@ -42,6 +42,7 @@ create table data_nilai
 	nilai8 int not null,
 	nilai9 int not null,
 	nilai10 int not null,
+	submitted tinyint not null,
 	constraint data_nilai_pk
 		primary key (id)
 );
