@@ -6,6 +6,14 @@ exports.ok = function ok(values, res) {
   res.json(data);
   res.end();
 };
+exports.okOnly = function okOnly(values, res) {
+  const data = {
+    data: values.data,
+  };
+  res.status(200);
+  res.json(data);
+  res.end();
+};
 
 exports.error = function error(message, res) {
   const data = {
