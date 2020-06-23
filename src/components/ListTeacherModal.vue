@@ -67,7 +67,6 @@
                 class="ma-2 align-self-center"
                 color="error"
                 @click="deleteData(person.username)"
-                v-if="person.id !== 1"
               >
                 Hapus
                 <v-icon right>mdi-delete-forever</v-icon>
