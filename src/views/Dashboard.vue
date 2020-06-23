@@ -93,10 +93,6 @@
                     <v-icon>mdi-plus</v-icon>
                     Tambah
                   </v-btn>
-                  <v-btn text>
-                    <v-icon>mdi-clipboard-list</v-icon>
-                    Lihat Daftar
-                  </v-btn>
                 </v-card-actions>
               </div>
               <v-icon class="ma-3" size="125" tile>
