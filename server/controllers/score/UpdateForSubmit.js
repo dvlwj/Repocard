@@ -7,15 +7,13 @@ exports.update = function update(req, res) {
   const {
     idSiswa,
     idMataPelajaran,
-    kategori,
-    nilai,
   } = requestPayloadBody;
   connection.query(
     {
-      sql: 'Update data_nilai set submitted = ? where id_siswa = ? and id_mata_pelajaran = ?',
+      sql: 'Update data_nilai set submitted = 2 where id_siswa = ? and id_mata_pelajaran = ?',
       timeout: 30000,
     },
-    [idMataPelajaran, kategori, nilai, idSiswa],
+    [idSiswa, idMataPelajaran],
     (error, rows) => {
       if (error || rows.length === 0) {
         const message = 'Gagal mengubah data nilai';

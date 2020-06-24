@@ -16,6 +16,7 @@ const deleteScore = require('./controllers/score/Delete');
 const readScore = require('./controllers/score/Read');
 const readScoreBySubject = require('./controllers/score/ReadBySubject');
 const updateScore = require('./controllers/score/Update');
+const updateScoreSubmit = require('./controllers/score/UpdateForSubmit');
 const authenticationStudent = require('./controllers/authentication/LoginStudentController');
 const changePassword = require('./controllers/authentication/ChangePasswordController');
 const changePasswordStudent = require('./controllers/authentication/ChangePasswordStudentController');
@@ -63,5 +64,7 @@ module.exports = function route(app) {
     .post(readScoreBySubject.read);
   app.route('/nilai/update')
     .post(updateScore.update);
+  app.route('/nilai/update/submit')
+    .post(updateScoreSubmit.update);
   // app.route('/users').get(todoList.users);
 };

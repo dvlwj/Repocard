@@ -7,7 +7,7 @@ exports.read = function read(req, res) {
   const { idMatpel } = requestPayloadBody;
   connection.query(
     {
-      sql: 'SELECT data_student.id, data_student.nama from data_student INNER JOIN data_nilai ON data_student.id=data_nilai.id_siswa where data_nilai.id_mata_pelajaran = ?',
+      sql: 'SELECT data_student.id, data_student.nama, data_student.kelas from data_student INNER JOIN data_nilai ON data_student.id=data_nilai.id_siswa where data_nilai.id_mata_pelajaran = ? and submitted = 1',
       timeout: 30000,
     },
     [idMatpel],
