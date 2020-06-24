@@ -21,6 +21,7 @@ exports.login = function login(req, res) {
           username: requestPayloadBody.username,
           password: requestPayloadBody.password,
           kelas: rows[0].kelas,
+          id: rows[0].id,
         };
         response.ok(dataToReturn, res);
       }
