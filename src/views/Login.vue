@@ -72,12 +72,45 @@ export default {
           this.$store.dispatch('setPassword', resToSave.password);
           this.$store.dispatch('setLevel', resToSave.level);
           this.$store.dispatch('setMatpel', resToSave.matpel);
+          this.$store.dispatch('setSiswa', false);
+          this.$store.dispatch('setSiswaID', null);
+          this.$store.dispatch('setSiswaKelas', null);
+
+          this.$router.push({ name: 'Dashboard' });
+        } else {
+          this.loginSiswa();
+        }
+      }).catch(() => {
+        this.loginSiswa();
+      });
+    },
+    loginSiswa() {
+      const dataToSend = {
+        username: this.loginUsername,
+        password: this.loginPassword,
+      };
+      axios({
+        method: 'post',
+        url: 'http://54.160.24.52:8081/login/siswa',
+        data: dataToSend,
+        timeout: 10000,
+      }).then((res) => {
+        if (res.status === 200) {
+          const resToSave = res.data.data;
+          this.$store.dispatch('setUsername', resToSave.username);
+          this.$store.dispatch('setPassword', resToSave.password);
+          this.$store.dispatch('setLevel', 3);
+          this.$store.dispatch('setMatpel', null);
+          this.$store.dispatch('setSiswa', true);
+          this.$store.dispatch('setSiswaID', resToSave.id);
+          this.$store.dispatch('setSiswaKelas', resToSave.kelas);
           this.$router.push({ name: 'Dashboard' });
         } else {
           alert('Login gagal');
         }
       }).catch((error) => {
-        alert(error);
+        console.log(error);
+        alert('Gagal Login');
       });
     },
   },

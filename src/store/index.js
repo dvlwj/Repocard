@@ -11,6 +11,9 @@ export default new Vuex.Store({
       level: null,
       matpel: null,
     },
+    siswa: null,
+    siswa_id: null,
+    siswa_kelas: null,
   },
   mutations: {
     ADD_USERNAME(state, data) {
@@ -24,6 +27,15 @@ export default new Vuex.Store({
     },
     ADD_MATPEL(state, data) {
       state.user.matpel = data;
+    },
+    ADD_SISWA(state, data) {
+      state.siswa = data;
+    },
+    ADD_SISWA_ID(state, data) {
+      state.siswa_id = data;
+    },
+    ADD_SISWA_KELAS(state, data) {
+      state.siswa_kelas = data;
     },
   },
   actions: {
@@ -39,12 +51,24 @@ export default new Vuex.Store({
     setMatpel({ commit }, data) {
       commit('ADD_MATPEL', data);
     },
+    setSiswa({ commit }, data) {
+      commit('ADD_SISWA', data);
+    },
+    setSiswaID({ commit }, data) {
+      commit('ADD_SISWA_ID', data);
+    },
+    setSiswaKelas({ commit }, data) {
+      commit('ADD_SISWA_KELAS', data);
+    },
   },
   getters: {
     getUsername: (state) => state.user.username,
     getPassword: (state) => state.user.password,
     getLevel: (state) => state.user.level,
     getMatpel: (state) => state.user.matpel,
+    getSiswa: (state) => state.siswa,
+    getSiswaID: (state) => state.siswa_id,
+    getSiswaKelas: (state) => state.siswa_kelas,
   },
   modules: {
   },

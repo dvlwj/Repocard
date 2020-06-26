@@ -5,7 +5,7 @@
     </v-row>
     <v-container>
       <v-row dense>
-        <v-col cols="12" v-if="level == 1 && username.toLowerCase() == 'admin'">
+        <v-col cols="12" v-if="level == 1 && username.toLowerCase() == 'admin' && !siswa">
           <v-card color="#1E88E5" dark tile>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -30,7 +30,7 @@
             </div>
           </v-card>
         </v-col>
-        <v-col cols="12" v-if="level == 1">
+        <v-col cols="12" v-if="level == 1 && !siswa">
           <v-card color="#43A047" dark tile>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -55,7 +55,7 @@
             </div>
           </v-card>
         </v-col>
-        <v-col cols="12">
+        <v-col cols="12" v-if="!siswa">
           <v-card color="#FF8F00" dark tile>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -80,7 +80,7 @@
             </div>
           </v-card>
         </v-col>
-        <v-col cols="12" v-if="level == 2">
+        <v-col cols="12" v-if="level == 2 && !siswa">
           <v-card color="#009688" dark tile>
             <div class="d-flex flex-no-wrap justify-space-between">
               <div>
@@ -93,10 +93,35 @@
                     <v-icon>mdi-plus</v-icon>
                     Tambah
                   </v-btn>
+                  <v-btn text @click="showModalScoreList()">
+                    <v-icon>mdi-clipboard-list</v-icon>
+                    Submit Nilai
+                  </v-btn>
                 </v-card-actions>
               </div>
               <v-icon class="ma-3" size="125" tile>
                 mdi-fountain-pen-tip
+              </v-icon>
+            </div>
+          </v-card>
+        </v-col>
+        <v-col cols="12" v-if="siswa">
+          <v-card color="#FF7043" dark tile>
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
+                <v-card-title class="headline">
+                  Rapor
+                </v-card-title>
+                <v-card-subtitle>Cek Nilai Anda disini</v-card-subtitle>
+                <v-card-actions>
+                  <v-btn text @click="showModalScoreReport()">
+                    <v-icon>mdi-book-open</v-icon>
+                    Buka Rapor
+                  </v-btn>
+                </v-card-actions>
+              </div>
+              <v-icon class="ma-3" size="125" tile>
+                mdi-bookshelf
               </v-icon>
             </div>
           </v-card>
@@ -116,6 +141,8 @@
     <CreateStudentModal ref="CreateStudentModal"></CreateStudentModal>
     <ListStudentModal ref="ListStudentModal"></ListStudentModal>
     <CreateScoreModal ref="CreateScoreModal"></CreateScoreModal>
+    <ListScoreModal ref="ListScoreModal"></ListScoreModal>
+    <ListScoreReportModal ref="ListScoreReportModal"></ListScoreReportModal>
   </v-container>
 </template>
 
@@ -127,6 +154,8 @@ import ListTeacherModal from '@/components/ListTeacherModal.vue';
 import CreateStudentModal from '@/components/CreateStudentModal.vue';
 import ListStudentModal from '@/components/ListStudentModal.vue';
 import CreateScoreModal from '@/components/CreateScoreModal.vue';
+import ListScoreModal from '@/components/ListScoreModal.vue';
+import ListScoreReportModal from '@/components/ListScoreReportModal.vue';
 
 export default {
   name: 'Dashboard',
@@ -138,10 +167,13 @@ export default {
     CreateStudentModal,
     ListStudentModal,
     CreateScoreModal,
+    ListScoreModal,
+    ListScoreReportModal,
   },
   data: () => ({
     username: null,
     level: null,
+    siswa: false,
   }),
   mounted() {
     this.getCredentials();
@@ -150,6 +182,7 @@ export default {
     getCredentials() {
       this.level = this.$store.getters.getLevel;
       this.username = this.$store.getters.getUsername;
+      this.siswa = this.$store.getters.getSiswa;
     },
     logout() {
       this.level = null;
@@ -176,6 +209,12 @@ export default {
     },
     showModalScoreCreate() {
       this.$refs.CreateScoreModal.showModalFunction();
+    },
+    showModalScoreReport() {
+      this.$refs.ListScoreReportModal.showModalFunction();
+    },
+    showModalScoreList() {
+      this.$refs.ListScoreModal.showModalFunction();
     },
     async resyncParent(modalName) {
       await this.getList();
