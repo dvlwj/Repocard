@@ -109,7 +109,7 @@ export default {
       };
       await axios({
         method: 'post',
-        url: 'http://localhost:8081/murid/update',
+        url: 'http://54.160.24.52:8081/murid/update',
         data: dataToSend,
         timeout: 10000,
       })

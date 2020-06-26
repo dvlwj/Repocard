@@ -292,7 +292,7 @@ export default {
       };
       await axios({
         method: 'post',
-        url: 'http://localhost:8081/nilai/create',
+        url: 'http://54.160.24.52:8081/nilai/create',
         data: dataToSend,
         timeout: 10000,
       })
@@ -313,7 +313,7 @@ export default {
     async getData() {
       await axios({
         method: 'get',
-        url: 'http://localhost:8081/murid/read',
+        url: 'http://54.160.24.52:8081/murid/read',
         timeout: 10000,
       })
         .then((res) => {
