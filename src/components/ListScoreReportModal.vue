@@ -27,7 +27,7 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-container v-model="listReport" color="primary" class="report-page">
+        <v-container fluid v-model="listReport" color="primary" class="report-page">
             <p class="student-name">Nama: {{this.$store.getters.getUsername}}</p>
             <p class="student-class">
               Kelas:
@@ -62,22 +62,30 @@
                   v-for="(subject, i) in listReport"
                   :key="i"
                 >
-                  <td>{{i+1}}</td>
-                  <td>{{returnSubjectName(subject.id_mata_pelajaran)}}</td>
-                  <td>{{subject.nilai1}}</td>
-                  <td>{{subject.nilai2}}</td>
-                  <td>{{subject.nilai3}}</td>
-                  <td>{{(subject.nilai1+subject.nilai2+subject.nilai3)/3}}</td>
-                  <td>{{subject.nilai4}}</td>
-                  <td>{{subject.nilai5}}</td>
-                  <td>{{subject.nilai6}}</td>
-                  <td>{{(subject.nilai4+subject.nilai5+subject.nilai6)/3}}</td>
-                  <td>{{subject.nilai7}}</td>
-                  <td>{{subject.nilai8}}</td>
-                  <td>{{(subject.nilai7+subject.nilai8)/2}}</td>
-                  <td>{{subject.nilai9}}</td>
-                  <td>{{subject.nilai10}}</td>
-                  <td>
+                  <td class="text-center">{{i+1}}</td>
+                  <td class="text-center bold">
+                    {{returnSubjectName(subject.id_mata_pelajaran)}}
+                  </td>
+                  <td class="text-center">{{subject.nilai1}}</td>
+                  <td class="text-center">{{subject.nilai2}}</td>
+                  <td class="text-center">{{subject.nilai3}}</td>
+                  <td class="text-center bold">
+                    {{((subject.nilai1+subject.nilai2+subject.nilai3)/3).toFixed(2)}}
+                  </td>
+                  <td class="text-center">{{subject.nilai4}}</td>
+                  <td class="text-center">{{subject.nilai5}}</td>
+                  <td class="text-center">{{subject.nilai6}}</td>
+                  <td class="text-center bold">
+                    {{((subject.nilai4+subject.nilai5+subject.nilai6)/3).toFixed(2)}}
+                  </td>
+                  <td class="text-center">{{subject.nilai7}}</td>
+                  <td class="text-center">{{subject.nilai8}}</td>
+                  <td class="text-center bold">
+                    {{((subject.nilai7+subject.nilai8)/2).toFixed(2)}}
+                  </td>
+                  <td class="text-center">{{subject.nilai9}}</td>
+                  <td class="text-center">{{subject.nilai10}}</td>
+                  <td class="text-center bold">
                     {{
                       (
                         (
@@ -211,10 +219,15 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+  .bold {
+    font-weight: bold;
+  }
   .report-page {
     margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
     padding: 1rem;
-    border: 1px solid #FF7043;
+    border: 3px solid #FF7043;
     border-radius: 0.25em;
   }
   .student-name {
