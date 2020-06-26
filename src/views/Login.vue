@@ -62,7 +62,7 @@ export default {
       };
       axios({
         method: 'post',
-        url: 'http://localhost:8081/login',
+        url: 'http://54.160.24.52:8081/login',
         data: dataToSend,
         timeout: 10000,
       }).then((res) => {

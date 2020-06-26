@@ -14,11 +14,23 @@ const updateStudent = require('./controllers/student/Update');
 const createScore = require('./controllers/score/Create');
 const deleteScore = require('./controllers/score/Delete');
 const readScore = require('./controllers/score/Read');
+const readScoreBySubject = require('./controllers/score/ReadBySubject');
+const readScoreByStudent = require('./controllers/score/ReadByStudent');
 const updateScore = require('./controllers/score/Update');
+const updateScoreSubmit = require('./controllers/score/UpdateForSubmit');
+const authenticationStudent = require('./controllers/authentication/LoginStudentController');
+const changePassword = require('./controllers/authentication/ChangePasswordController');
+const changePasswordStudent = require('./controllers/authentication/ChangePasswordStudentController');
 
 module.exports = function route(app) {
   app.route('/login')
     .post(authentication.login);
+  app.route('/login/siswa')
+    .post(authenticationStudent.login);
+  app.route('/changePassword')
+    .post(changePassword.login);
+  app.route('/changePassword/student')
+    .post(changePasswordStudent.login);
   app.route('/guru/create')
     .post(createTeacher.create);
   app.route('/guru/delete')
@@ -49,7 +61,13 @@ module.exports = function route(app) {
     .post(deleteScore.deleteController);
   app.route('/nilai/read')
     .get(readScore.read);
+  app.route('/nilai/readBySubject')
+    .post(readScoreBySubject.read);
+  app.route('/nilai/readByStudent')
+    .post(readScoreByStudent.read);
   app.route('/nilai/update')
     .post(updateScore.update);
+  app.route('/nilai/update/submit')
+    .post(updateScoreSubmit.update);
   // app.route('/users').get(todoList.users);
 };

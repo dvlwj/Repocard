@@ -20,7 +20,7 @@ exports.create = function create(req, res) {
   } = requestPayloadBody;
   connection.query(
     {
-      sql: 'INSERT INTO data_nilai (id_siswa, id_mata_pelajaran, nilai1, nilai2, nilai3, nilai4, nilai5, nilai6, nilai7, nilai8, nilai9, nilai10) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      sql: 'INSERT INTO data_nilai (id_siswa, id_mata_pelajaran, nilai1, nilai2, nilai3, nilai4, nilai5, nilai6, nilai7, nilai8, nilai9, nilai10, submitted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)',
       timeout: 30000,
     },
     [idSiswa, idMataPelajaran, nilai1, nilai2, nilai3,

@@ -111,7 +111,7 @@ export default {
       };
       await axios({
         method: 'post',
-        url: 'http://localhost:8081/guru/update',
+        url: 'http://54.160.24.52:8081/guru/update',
         data: dataToSend,
         timeout: 10000,
       })

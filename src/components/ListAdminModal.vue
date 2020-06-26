@@ -114,7 +114,7 @@ export default {
     async getList() {
       await axios({
         method: 'get',
-        url: 'http://localhost:8081/admin/read',
+        url: 'http://54.160.24.52:8081/admin/read',
         timeout: 10000,
       })
         .then((res) => {
@@ -141,7 +141,7 @@ export default {
       await axios({
         method: 'post',
         data: dataToSend,
-        url: 'http://localhost:8081/admin/delete',
+        url: 'http://54.160.24.52:8081/admin/delete',
         timeout: 10000,
       })
         .then((res) => {
