@@ -9,11 +9,11 @@
       tile
     >
       <v-card>
-        <v-toolbar dark color="#FF8F00" tile>
+        <v-toolbar dark color="#009688" tile>
           <v-btn icon dark @click="hideModal">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Daftar Murid</v-toolbar-title>
+          <v-toolbar-title>Submit Nilai</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
@@ -50,44 +50,27 @@
             </v-col>
             <v-col :cols="2" class="align-self-center">
               <v-btn
-                cols="2"
-                sm="2"
                 class="ma-2 align-self-center"
-                color="success"
-                @click="
-                  showUpdateDataModal(person.id, person.nama, person.password, person.kelas)
-                "
+                color="primary"
+                @click="submitData(person.id)"
               >
-                Detil
-                <v-icon right>mdi-account-details</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col :cols="2" class="align-self-center">
-              <v-btn
-                class="ma-2 align-self-center"
-                color="error"
-                @click="deleteData(person.nama)"
-              >
-                Hapus
-                <v-icon right>mdi-delete-forever</v-icon>
+                Submit
+                <v-icon right>mdi-check-all</v-icon>
               </v-btn>
             </v-col>
           </v-row>
         </v-container>
       </v-card>
     </v-dialog>
-    <UpdateStudentModal ref="UpdateStudentModal"></UpdateStudentModal>
   </v-row>
 </template>
 
 <script>
 import axios from 'axios';
-import UpdateStudentModal from '@/components/UpdateStudentModal.vue';
 
 export default {
-  name: 'ListStudentModal',
+  name: 'ListScoreModal',
   components: {
-    UpdateStudentModal,
   },
   data: () => ({
     showModal: false,
@@ -122,41 +105,46 @@ export default {
   },
   methods: {
     async getList() {
+      const dataToSend = {
+        idMatpel: this.$store.getters.getMatpel,
+      };
       await axios({
-        method: 'get',
-        url: 'http://54.160.24.52:8081/murid/read',
+        method: 'post',
+        url: 'http://54.160.24.52:8081/nilai/readBySubject',
+        data: dataToSend,
         timeout: 10000,
       })
         .then((res) => {
           if (res.status !== 200) {
-            const message = 'Gagal mendapatkan daftar guru, silahkan coba lagi';
+            const message = 'Gagal mendapatkan daftar nilai siswa, silahkan coba lagi';
             alert(message);
             return;
           }
+          // alert(JSON.stringify(res.data));
           const responsePayload = res.data;
-          const dataFromResponse = responsePayload.data;
+          const dataFromResponse = responsePayload;
           this.listMurid = dataFromResponse.data;
+          console.log('List murid', JSON.stringify(this.listMurid));
         })
         .catch((error) => {
-          alert(error);
+          console.log(error);
+          this.listMurid = null;
         });
     },
-    async showUpdateDataModal(id, nama, password, classRoom) {
-      this.$refs.UpdateStudentModal.showModalFunction(id, nama, password, classRoom);
-    },
-    async deleteData(namaData) {
+    async submitData(id) {
       const dataToSend = {
-        nama: namaData,
+        idSiswa: id,
+        idMataPelajaran: this.$store.getters.getMatpel,
       };
       await axios({
         method: 'post',
         data: dataToSend,
-        url: 'http://54.160.24.52:8081/murid/delete',
+        url: 'http://54.160.24.52:8081/nilai/update/submit',
         timeout: 10000,
       })
         .then((res) => {
           if (res.status !== 200) {
-            const message = 'Gagal menghapus guru, silahkan coba lagi';
+            const message = 'Gagal mengsubmit nilai, silahkan coba lagi';
             alert(message);
             return;
           }
